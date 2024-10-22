@@ -71,7 +71,11 @@ Para hacer mas útil la aplicación, en lugar de capturar las coordenadas con ca
 2. Ejecute su aplicación en varios navegadores (y si puede en varios computadores, accediendo a la aplicación mendiante la IP donde corre el servidor). Compruebe que a medida que se dibuja un punto, el mismo es replicado en todas las instancias abiertas de la aplicación.
 ![image](https://github.com/user-attachments/assets/c059f0a3-f441-4a3e-b674-8a580a676277)
 
-3. Haga commit de lo realizado, para marcar el avance de la parte 2.
+![image](https://github.com/user-attachments/assets/478b56ba-3305-4913-a820-76d2da42a51c)
+
+
+
+4. Haga commit de lo realizado, para marcar el avance de la parte 2.
 
 	```bash
 	git commit -m "PARTE 2".
@@ -83,6 +87,15 @@ Ajuste la aplicación anterior para que pueda manejar más de un dibujo a la vez
 
 1. Agregue un campo en la vista, en el cual el usuario pueda ingresar un número. El número corresponderá al identificador del dibujo que se creará.
 2. Modifique la aplicación para que, en lugar de conectarse y suscribirse automáticamente (en la función init()), lo haga a través de botón 'conectarse'. Éste, al oprimirse debe realizar la conexión y suscribir al cliente a un tópico que tenga un nombre dinámico, asociado el identificador ingresado, por ejemplo: /topic/newpoint.25, topic/newpoint.80, para los dibujos 25 y 80 respectivamente.
+
+![image](https://github.com/user-attachments/assets/b2626a85-5bb3-42b5-ae7b-d5e9c94f0c1f)
+
+![image](https://github.com/user-attachments/assets/7c216fbe-dca0-4fbe-aff3-23ddd38895cf)
+
+![image](https://github.com/user-attachments/assets/1cc32183-bc3b-4f69-96c8-b7aa38baea49)
+
+
+
 3. De la misma manera, haga que las publicaciones se realicen al tópico asociado al identificador ingresado por el usuario.
 4. Rectifique que se puedan realizar dos dibujos de forma independiente, cada uno de éstos entre dos o más clientes.
 
@@ -131,10 +144,11 @@ Para ver cómo manejar esto desde el manejador de eventos STOMP del servidor, re
 	3. El cliente, ahora también se suscribirá al tópico '/topic/newpolygon'. El 'callback' asociado a la recepción de eventos en el mismo debe, con los datos recibidos, dibujar un polígono, [tal como se muestran en ese ejemplo](http://www.arungudelli.com/html5/html5-canvas-polygon/).
 	4. Verifique la funcionalidad: igual a la anterior, pero ahora dibujando polígonos cada vez que se agreguen cuatro puntos.
 	
-	
+	![image](https://github.com/user-attachments/assets/f65df9be-f21c-4add-9194-d8b1406ef32f)
+
 5. A partir de los diagramas dados en el archivo ASTAH incluido, haga un nuevo diagrama de actividades correspondiente a lo realizado hasta este punto, teniendo en cuenta el detalle de que ahora se tendrán tópicos dinámicos para manejar diferentes dibujos simultáneamente.
 
-5. Haga commit de lo realizado.
+6. Haga commit de lo realizado.
 
 	```bash
 	git commit -m "PARTE FINAL".
