@@ -12,7 +12,7 @@ var app = (function () {
     var stompClient = null;
 
     var addPointToTopic = function(point){
-        stompClient.send("/topic/newpoint", {}, JSON.stringify(point));
+        stompClient.send(topico, {}, JSON.stringify(point));
         //console.log("funciona"+point);
     };
 
@@ -43,7 +43,7 @@ var app = (function () {
         //subscribe to /topic/TOPICXX when connections succeed
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/newpoint', function (eventbody) {
+            stompClient.subscribe(topico, function (eventbody) {
 
                 var theObject = JSON.parse(eventbody.body);
                 var x = theObject.x;
@@ -61,26 +61,19 @@ var app = (function () {
 
     return {
 
-        init: function () {
-            //var can = document.getElementById("canvas");
-            
+        connect: function (dibujoid) {
+            var can = document.getElementById("canvas");
+            topico = "/topic/newpoint."+dibujoid;
+
             //websocket connection
             connectAndSubscribe();
-
-            var can = document.getElementById("canvas");
-            var offset;
-            if(window.PointerEvent) {
-                can.addEventListener("pointerdown", function(event){
-                    offset  = getMousePosition(event);
-                    app.publishPoint(offset.x,offset.y);
-                });
-            } else {
-                canvas.addEventListener("mousedown", function(event){
-                    offset  = getMousePosition(event);
-                    app.publishPoint(offset.x,offset.y);
-                    
-                });
-        
+            alert("Dibujo No"+dibujoid);
+            if(window.PointerEvent){
+                can.addEventListener("pointerdown",function(evt){
+                    var pt = getMousePosition(evt);
+                    addPointToCanvas(pt);
+                    addPointToTopic(pt);
+                })
             }
         },
 
