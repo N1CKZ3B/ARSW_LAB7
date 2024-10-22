@@ -1,5 +1,7 @@
 var app = (function () {
 
+    var topico = 0;
+
     class Point{
         constructor(x,y){
             this.x=x;
@@ -8,6 +10,11 @@ var app = (function () {
     }
     
     var stompClient = null;
+
+    var addPointToTopic = function(point){
+        stompClient.send("/topic/newpoint", {}, JSON.stringify(point));
+        //console.log("funciona"+point);
+    };
 
     var addPointToCanvas = function (point) {        
         var canvas = document.getElementById("canvas");
