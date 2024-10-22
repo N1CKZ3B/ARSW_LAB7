@@ -42,7 +42,8 @@ var app = (function () {
                 var x = theObject.x;
                 var y = theObject.y;
 
-                alert('Punto recibido:\nX: ' + x + '\nY: ' + y  );
+                var point = new Point(x, y);
+                addPointToCanvas(point);
 
             });
         });
@@ -54,10 +55,26 @@ var app = (function () {
     return {
 
         init: function () {
-            var can = document.getElementById("canvas");
+            //var can = document.getElementById("canvas");
             
             //websocket connection
             connectAndSubscribe();
+
+            var can = document.getElementById("canvas");
+            var offset;
+            if(window.PointerEvent) {
+                can.addEventListener("pointerdown", function(event){
+                    offset  = getMousePosition(event);
+                    app.publishPoint(offset.x,offset.y);
+                });
+            } else {
+                canvas.addEventListener("mousedown", function(event){
+                    offset  = getMousePosition(event);
+                    app.publishPoint(offset.x,offset.y);
+                    
+                });
+        
+            }
         },
 
         publishPoint: function(px,py){
