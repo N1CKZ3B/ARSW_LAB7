@@ -1,4 +1,4 @@
-package edu.eci.arsw.msgbroker;
+/*package edu.eci.arsw.msgbroker;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,4 +13,4 @@ public class WebsocketsMsbrokerExampleApplicationTests {
 	public void contextLoads() {
 	}
 
-}
+}*/

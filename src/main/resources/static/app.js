@@ -37,10 +37,12 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newpoint', function (eventbody) {
-                var pointData = JSON.parse(eventbody.body);
-                var x = pointData.x;
-                var y = pointData.y;
-                alert('X: ' + x + ', Y: ' + y);
+
+                var theObject = JSON.parse(eventbody.body);
+                var x = theObject.x;
+                var y = theObject.y;
+
+                alert('Punto recibido:\nX: ' + x + '\nY: ' + y  );
 
             });
         });
@@ -62,8 +64,12 @@ var app = (function () {
             var pt=new Point(px,py);
             console.info("publishing point at "+pt);
             addPointToCanvas(pt);
-            stompClient.send("/topic/newpoint", {}, JSON.stringify(pt));
             //publicar el evento
+
+             stompClient.send("/topic/newpoint", {}, JSON.stringify({x:px,y:py}));
+
+             //enviando un objeto creado a partir de una clase
+             stompClient.send("/topic/newpoint", {}, JSON.stringify(pt));
         },
 
         disconnect: function () {
